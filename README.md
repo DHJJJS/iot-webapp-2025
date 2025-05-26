@@ -106,7 +106,7 @@
     ```
 - html 태그 속성
     - id : 웹페이지 하나당 한번만 쓸것
-    - class : 여러번 사용가능
+    - class : 여러번, 여러개 사용가능
 
 - UI기술로 많은 분야에서 사용
     - Qt, PyQt, Electron, Flutter(모바일), React Native(모바일), React.js, ...
@@ -114,4 +114,237 @@
 
 ## 2일차
 
+### 웹 표준기술 - CSS
+- HTML, CSS, JS 동일하게 "(쌍따옴표), '(홑따옴표) 동시 사용가능
+- Python은 ''를 추천, 웹은 ""를 추천
+- 스타일부터 레이아웃까지 연습
+- [소스](./day02/html04.html)
+
+### 웹 표준기술 - JavaScript
+- Java(컴파일러언어)와 아무런 관계없음
+- JavaScript(스크립트언어)
+- [소스](./day02/html05.html)
+
+#### 기본문법
+- HTML내에 script 태그 내에 작성
+- 변수 선언이 var(전역,지역), let(지역)
+- 문장 끝에 ; 생략이 가능하지만 되도록 사용할 것
+- 키워드
+
+    <img src="./image/web0001.png" width="600">
+
+- 화면메시지박스 : alert()
+- 디버깅 출력 : console.log()
+
+    ```js
+    <script>
+        // 변수 선언
+        var radius = 10;
+        var PI = 3.14159265;
+
+        // 출력
+        alert(2 * radius * PI);
+        console.log(2 * radius * PI);
+        // 개발자도구 > 소스에서 디버깅가능
+        // VisualStudio와 동일
+    </script>    
+    ```
+- 변수타입 : 숫자, 문자열, 불린, ... 
+    - null : undefined
+- 연산자 : 비교연산자, 수식연산자, 논리연산자, ...
+    - 차이점 : === (타입과 값이 완전일치)
+- 흐름제어 : if, for, while 
+- 함수 : function 함수명
+    - 익명함수 function() {}
+- 거의 대부분 C문법과 동일
+
+#### JavaScript 객체
+- [소스](./day02/html06.html)
+- JSON : 자바스크립트 객체를 표현하는 방식
+- 매우 편리하여 표준으로 지정하고 모든 IT분야에서 사용 중
+
+    ```js
+    var json_data = {
+        key1: value1,
+        key2: value2,
+        method: function() {
+            // ...
+        },
+    }
+    ```
+
+#### DOM
+- [소스](./day02/html07.html)
+- Document Object Model : HTML 문서의 구조를 JS에서 접근할 수 있는 개념
+- HTML 태그를 JS로 조작한다는 의미
+- JS에서 가장 중요한 부분 - 전통적인 JS 처리방식(구닥다리)
+- DOM에서 쓰이는 주요 함수들
+
+    ```js
+    // 1개 선택
+    document.querySelector(선택자);
+    document.getElementById(아이디);
+    // 다중 선택
+    document.querySelectorAll(선택자); // for문으로 후처리
+    document.getElementsByName(이름);
+    document.getElementsByClassName(클래스);
+
+    // 객체변수
+    var obj = document.getElementById("container");
+    obj.style.backgroundColor = 'red';
+    obj.style.color = 'blue';
+    obj.innerHTML = "변경 문자열";
+    obj.getAttribute("속성");
+    obj.setAttribute("속성", 변경할값);
+
+    window.onload = function(event) {
+        // ...
+    }
+    ```
+
+#### jQuery
+- JavaScript DOM의 복잡한 사용법을 개선하고 만든 라이브러리
+- 2006년도 개발, 2023년까지 업데이트
+- https://jquery.com/
+- CDN 방식으로 사용
+    ```html
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    ```
+- 모든 DOM 객체에 접근할때 `$(선택자|아이디|클래스)` 로 처리
+- jQuery on('이벤트', function() {}) 또는 이벤트(function () {})
+
+    <img src="./image/web0002.png" width="600">
+
+- [소스](./day02/html09.html)
+
+#### Vanilla JS
+- 순수 JS로 불리며 jQuery처럼 CDN링크가 필요없음
+- 전통적 방식보다 효율적으로 변경됨
+- 새로 개발되는 웹사이트는 Vanilla JS를 사용
+
 ## 3일차
+
+### 반응형웹
+- UTF-8 적용 전 : 한국어웹, 영어웹, 일본어웹 등 웹페이지를 언어별로 개발필요
+- 반응형 웹 이전 : PC용, 모바일용, 태블릿용 등 웹사이트 다중 개발필요
+- 문제 : 하나의 웹페이지가 수정되면 다른 웹페이지들도 다 수정 -> 시간, 돈의 Loss
+- 하나의 웹페이지로 기기, 언어문제를 전부 해결하고자 나온 기술중 화면쪽 -> 반응협웹
+- `Responsive Web` : 웹, 모바일 등의 기기와 해상도에 상관없이 하나의 웹으로 모두 표현할 수 있는 웹화면 개발 기술
+
+- HTML5에 반응형 웹 메타태그만 사용
+
+    ```html
+    <!DOCTYPE html>
+    ...
+    <head>
+    <!-- 반응형웹 중요태그 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    ```
+
+- 부트스트랩으로 학습
+- https://inpa.tistory.com/category/Style%20Sheet/Bootstrap5?page=2 
+
+### 부트스트랩
+- 현재 전세계적으로 가장 많이 사용되는 오픈소스 CSS, JS 프레임워크
+- 트위터 블루프린트로 시작. 트위터 웹사이트를 꾸미기위해서 개발시작
+- 현재 5.3 버전
+- 이전에는 jQuery 사용했으나 현재는 Pure JS로 전향되었음
+- [공식사이트](https://getbootstrap.com/)
+
+#### 부트스트랩 시작
+- [시작](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+- GetStarted에 나와있는 CSS와 JS를 웹페이지에 붙여넣기
+
+    <img src="./image/web0003.png" width="600">
+
+#### 부트스트랩 학습
+- 버튼 사용법
+
+    <img src="./image/web0004.png" width="600">
+
+- 미디어쿼리 : 웹페이지 사이즈에 따른 사용법을 위해 필요
+    - Bootstrap에서 sm, md, lg 등의 infix를 사용할 경우가 많음  
+    - X-Small : None(사용할 이름없음) (< 576px)
+    - Small : sm (>= 576px)
+    - Medium : md (>= 768px)
+    - Large : lg (>= 992px)
+    - Extra large : xl (>= 1200px)
+    - Extra extra large : xxl (>= 1400px)
+
+- 컨테이너 : 기본 레이아웃에서 가장 중요! 그리드 스타일이라고 부름
+    - container - 일반적인 넓이사용. 양쪽에 여백이 존재
+    - container-fluid - 여백없이 웹페이지를 꽉채우는 스타일
+    - container > row > col 형식으로 사용
+    - 각 grid는 최대 12개까지 사용
+
+- 정렬 클래스
+    - * : start, center, end
+    - text-*
+    - align-items-*
+    - align-self-*
+    - justify-content-*
+
+- 거터 : 갭(안쪽여백), padding과 동일
+    - g, gx, gy, g-number, gx-number, gy-number
+    - number : 1부터 5까지 사용가능
+    - g : gx + gy
+    - gx : 왼쪽, 오른쪽 안여백
+    - gy : 위쪽, 아래쪽 안여백
+
+- 여백을 위한 클래스
+    - -number포함 : 1~5까지
+    - p, ps, pt, pb, pe, px, py : padding
+    - m, ms(left), mt, mb, me(right), mx, my : margin
+    - start, top, end, bottom : 배율로 조정
+
+- 컴포넌트 학습
+    - Accordion
+    - Alert : Button 클래스와 동일 primary ~ light(link는 없음)
+    - Breadcrumb : 메뉴 경로
+    - Navbar, Navs & tabs : 메뉴 내비게이션바
+    - Button, Close button, Button group : 버튼관련 컴포넌트
+    - Card, Placeholders, Modal, `Popovers`, Toasts, `Tooltips` : 화면 영역 컴포넌트
+    - Pagination : 게시판 페이지 컴포넌트
+    - Progress, Spinners : 프로그레스바, 대기용 컴포넌트
+    - Carousel : 이미지 갤러리
+
+    <img src="./image/web0005.png" width="600">
+
+- 아이콘
+    - [사이트](https://icons.getbootstrap.com/)
+    - 부트스트랩이 지원해주는 아이콘
+    - Python PyQt, leaflet.js(Folium) 등에도 사용가능
+    - FontAwesome, XEIcon, Google Icon Fonts
+
+#### 이미지팁
+- 화면 UI 설계시 이미지 찾는 시간을 절약하기 위해 만든 사이트
+- placehold image Site
+    - [플레이스홀드](https://placehold.co/)
+    - [로렙플릭커](https://loremflickr.com/)
+    - [로렘픽섬](https://picsum.photos/)(추천)
+
+#### 부트스트랩 템플릿 사이트
+- 유료 템플릿
+    - https://wrapbootstrap.com/templates 
+    - https://themeforest.net/search/sns%20bootstrap : 필요한 소스코드도 구매가능
+    - https://themewagon.com/theme-price/pro/
+- 무료 템플릿
+    - https://startbootstrap.com/ : 무표 템플릿 중 최고
+    - https://bootswatch.com/
+    - https://bootstrapmade.com/ : 출처를 표기해야 함
+    - https://themewagon.com/theme-price/free/
+    - https://graygrids.com/templates/tag/bootstrap-5?type=free
+
+### 프론트엔드 활용
+- HTML5 + CSS3 + JS + BootStrap 응용예제
+    - Bootstrap Image Gallery
+
+    https://github.com/user-attachments/assets/fd0f5d4a-a8b7-4c84-bbad-cd682d40f5c0
+
+    
+## 4일차
+
+### 프론트엔드 활용
+- HTML5 + CC3 + JS 응용예제
+
+### ASP.NET Core 
