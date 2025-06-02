@@ -73,6 +73,7 @@
 - img, audio, video : 이미지, 오디오, 비디오 
 - [소스](./day01/html05.html), [소스](./day01/html06.html)
 - form, input, button, select, textarea, label : 입력양식, 텍스트박스, 버튼, 콤보박스, 여러줄텍스트박스, 라벨
+    - form action에 `get`과 `post`. (dialog는 무시)
 - progress : 진행률
 - div, span : 공간분할
 
@@ -328,6 +329,7 @@
     - https://wrapbootstrap.com/templates 
     - https://themeforest.net/search/sns%20bootstrap : 필요한 소스코드도 구매가능
     - https://themewagon.com/theme-price/pro/
+    - https://themes.getbootstrap.com/ 부트스트랩 공식 유료템플릿
 - 무료 템플릿
     - https://startbootstrap.com/ : 무표 템플릿 중 최고
     - https://bootswatch.com/
@@ -346,5 +348,380 @@
 
 ### 프론트엔드 활용
 - HTML5 + CC3 + JS 응용예제
+- Modern Business 템플릿 클로닝
+    - https://startbootstrap.com/template/modern-business 
+
+    <img src="./image/web0006.png" width="700">
+
+    - 압축파일 다운로드 후 압축해제
+
+#### HTML5 Responsive Web template 
+- https://html5up.net/
+
+#### Modern Business 클로닝
+1. 모든 웹페이지 시작은 index.* (.html, .asp, .jsp, .cshtml...)
+2. 폴더 구성 : css, js, assets
+3. favicon.ico 구성
+4. Bootstrap 다운로드 후 폴더에 구성(not CDN)
+    - bootstrap-5.3.6-dist.zip
+5. Bootstrap Icon 링크 클릭 다운로드
+    - https://github.com/twbs/icons/releases/tag/v1.13.1
+    - bootstrap-icons-1.13.1.zip
+    - css 폴더 아래 fonts 폴더 생성
+    - bootstrap-icons.woff, bootstrap-icons.woff2 붙여넣기
+6. body 마지막 Bootstrap js 링크 추가
+7. body 내의 태그영역으로 나눠서 클로닝
+    - div, main
+        - div, nav
+        - div, header
+        - div, feature
+        - div, testimonial
+        - div, blog_section
+    - div, footer
+8. 태그 내에 Bootstrap 클래스 적용
+9. Bootstrap Example의 테마 적용
+10. 전체화면
+
+    https://github.com/user-attachments/assets/d205515e-3edc-4a2a-a538-a08137dad2b1
+
+### 5일차
+
+### 웹개발 기술 용어
+- SPA : Single Page Applicaiton. 페이지를 이동해도 새로고침 없이 한페이지에서 작동하는 웹
+- MPA : Multi Page Applicaiton. 전통적인 여러페이지로 작동하는 웹
+- CSR : Client-Side Rendering. 대부분의 SPA가 동작하는 방식. 렌더링을 브라우저에서 처리
+- SSR : Server-Side Rendering. MPA가 위주. HTML을 서버에서 생성후 전달(naver, google 등 포털)
 
 ### ASP.NET Core 
+- ASP : Active Server Page. Classic ASP라고 부름. 동적인 웹페이지를 만드는 기술
+- 프론트엔드(HTML + CSS + JS) 상에서 동작하는 기술을 동적 웹페이지라고 부르지 않음
+- 동적 웹페이지 : 사용자가 웹서버에 요청을 해서 값이 변경되는 것
+
+    <img src="./image/web0007.png" width="600">
+
+- IIS : Internet Information Service. MS가 윈도우 운영체제에 포함시킨 `웹 서버`
+    - 윈도우 프로그램 추가 제거(appwiz.cpl)
+    - 윈도우 기능 켜기/끄기 > 인터넷 정보 서비스 클릭 후 확인
+
+- 윈도우 설정은 일반 사용자용, 제어판은 개발자용
+    - 제어판 > Windows Tools > IIS(인터넷 정보 서비스) 관리자
+    
+    <img src="./image/web0008.png" width="600">
+
+- Java가 1995년 출현하면서 Classic ASP, Classic VB 등의 옛날 MS기술이 위협
+- 2000년 초반에 .NET 프레임워크를 출시
+    - C#, VB(.NET) 새로운 언어 들이 포함됨
+    - 위의 언어들로 개발할 수 있는 웹 기술인 ASP.NET 등장
+    - 이후 언어는 계속 발전
+    - 2016년에 크로스플랫폼 ASP.NET Core
+    - 2020년에 .NET Framework(Windows전용)을 .NET 5.0(크로스플랫폼)로 변경
+
+#### ASP.NET Core 장점
+- 빠르다 : 초창기 ASP.NET은 C#으로 Winforms 만드는 것처럼 개발(개발생산성은 좋지만 렌더링 속도가 무지하게 느렸음). MVC모델로 분리하면서 윈폼식 개발을 제거
+- 오픈소스 : Java JSP/Spring, Python Flask 등이 오픈소스로 발전하니까 MS도 오픈소스 전향
+- 크로스플랫폼 : Windows에서만 동작하던 걸, MacOS, Linux 등으로 확대시킴
+- 종속성 주입 : Dependencty Injection. Spring 쪽에 특화되던 기술을 접목해옴. 개발시간 절약
+- 개발용 웹서버 : IIS가 Visual Studio에 포함. 웹서버 설정을 할 필요가 없음
+- 클라우드 친화적 : MS Azure 등의 클라우드와 연계가 쉬움
+- MVC 모델 : Model View Controller를 따로 개발. Spring Boot도 동일
+- 최적화가 잘 되어 있음
+
+#### ASP.NET Core 활용처
+- `웹 사이트` 개발 : 기본적인 내용
+- `풀스택` 개발 : 프론트엔드(React, Vue, Angular js) + 백엔드(ASP.NET Core)
+- `API 서버` 개발 : TMDB 영화 데이터 조회 API, Youtube API, 데이터포털 API 등의 데이터만 주고받는 서비스 개발
+- 도메인특화 솔루션 개발 : MES, ERP, SmartFactory, SmartShip 등
+- 이커머스 개발 : 쇼핑몰, 온라인 서점, 여행예매 사이트 등
+
+#### ASP.NET Core 시작
+1. Visual Studio 시작 > 새 프로젝트 만들기
+2. ASP.NET Core 웹앱(Model-View-Controller) 선택
+3. 프로젝트 이름, 위치, 솔루션 이름 입력 
+4. 추가정보
+    - HTTPS : 보안 인증서를 신청, 다운로드 설정을 해야 함. 복잡, 체크해제
+    - 최상위 문 사용 안함 만 체크 
+5. 빌드 후 실행 
+6. properties > launchSetting.json 에서 자신의 포트번호 확인
+7. 기본 ASP.NET Core 웹앱에 포함된 프론트엔드 라이브러리
+    - Bootstrap 5.1.0
+    - jQuery 3.6.0
+    - 최신버전으로 변경하고 싶으면 다운로드 받아서 구성하면 됨
+    - 경로 - \wwwroot\lib\bootstrap\dist
+
+#### ASP.NET Core 프로젝트 구조
+- Properties > launchSettings.json - 웹서버 실행 설정
+- wwwroot - 정적 리소스 구성한 폴더
+    - css : 웹페이지 추가적인 css
+    - js : 웹페이지 추가적인 js
+    - lib : Bootstrap, jQuery 등의 라이브러리 포함된 폴더
+    - favicon.ico : 웹페이지 대표 아이콘
+- 종속성 : .NET 관련 NuGet 패키지 라이브러리(종속성)
+- Controllers : MVC 패턴 중 Controller 관리
+    - HomeController : Controller postfix는 제거하고 호출. Views에 postfix를 제거한 폴더 존재    
+    - 메서드 : 메서드 이름과 동일한 cshtml이 존재
+    - 비즈니스 로직이 포함
+- Models : MVC 중 Model
+    - 데이터, DB관련된 소스 포함
+- Views : MVC 중 View 역할
+    - Controller에 포함된 클래스와 동일한 이름의 폴더, cshtml이 존재
+    - cshtml : HTML + ASP.NET 기술이 포함된 웹페이지
+        - @, asp-append-version, asp-controller, asp-action 등의 속성
+    - _Layout.cshtml : 전체 HTML 틀을 구성. @RenderBody()에서 표현
+    - 웹사이트는 중간 content 이외는 모양이 항상 동일
+    - cshtml 중 _로 시작하는 파일은 여러번 공유하겠다는 뜻
+- appsettings.json : 로그 등 애플리케이션 설정
+- Program.cs : C# 프로그램 시작점. 실제 웹앱이 시작될 때 필요한 초기화 담당
+    - 중요 소스
+
+    ```cs
+    // ...
+    app.UseStaticFiles();   // 정적인 HTML,CSS,JS를 사용하겠다
+    app.UseRouting();       // 라우팅으로 URL을 사용하겠다
+    app.UseAuthorization(); // 권한 설정을 사용하겠다
+    // http://localhost:port/Home/Index/2 와 같이 URL을 사용하겠다
+    // RESTful URL -> Rest API를 위한 요소 중 하나
+    // Program.cs 에서 중요한 파트
+    // controller의 Home, action의 Index는 Default값
+    app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+    // ...
+    ```
+
+#### ASP.NET Core 페이지 생성법
+1. 기존 Controller가 존재할 때
+    - cshtml에 asp-controller, asp-action 속성 추가
+    - Controller에 asp-action의 속성값과 동일한 메서드 추가
+    - Views 폴더에 같은 이름의 cshtml을 생성, 작성
+
+2. Controller가 없을때 1
+    - Controllers 폴더에서 컨트롤러 생성
+    - MVC 컨트롤러 - 비어있음 선택
+    - SideController 클래스 생성
+    - Index() 메서드에서 오른쪽 버튼 뷰 추가 선택
+    - Razor 뷰 - 비어있음 선택
+    - Index.cshtml 생성 후 작성
+
+3. **Controller가 없을때 2**
+    - `EntityFramework 사용하여 뷰가 포함된 MVC 컨트롤러` 또는 `읽기/쓰기 동작이 포함된 컨트롤러` 중 선택
+    - BoardController 클래스 생성
+
+        <img src="./image/web0009.png" width="600">
+
+    - 메서드 Index() 부터 Delete() 까지 총 8개 메서드 생성
+    - Models 폴더에서 모델 Board.cs 추가
+    - 인덱스 마다 뷰 추가. Razor 뷰 선택(Razor 뷰 - 비어있음 아님!)
+
+        <img src="./image/web0010.png" width="600">
+
+        <img src="./image/web0011.png" width="600">
+
+        - 템플릿 : Create, Delete, Details, List, Edit (DB의 CRUD와 매핑)
+        - 모델 클래스 : MVC, MVVN에서 Model 클래스가 포함되어야 함 (DB 설정이 필요)
+
+    - Razor 뷰 선택
+    - Index.cshtml 생성
+    - _Layout.cshtml 에 내비게이션 메뉴 추가
+
+#### ASP.NET Core MVC
+
+<img src="./image/web0012.png" width="650">
+
+- MVVM과 MVC 패턴의 구조에대 설명할 수 있어야 함!
+- 현재 기본적인 웹개발의 표준. Java도 Spring Boot MVC
+- 프론트엔드가 심각한 스파게티 코드였으면 현재는 최소화하고 있음
+- Razor 구문 : @로 시작하는 C# 문법에 대한 이해
+
+- DB 연동방법
+    - 전통적인 방법 : WPF나 윈앱에서 연동방법. SQL쿼리문을 직접 작성, 실행
+    - 현대적인 방법 : EntityFramework 방식. 쿼리를 사용하지 않음
+        - DB First : DB를 설계해 놓고, 연결, 사용하는 방식
+        - Code First : 모델 클래스만 만들어 놓고, EF가 DB에 테이블을 자동 생성
+
+
+#### ASP.NET Core MVC - Kelly Portfolio 디자인 클로닝
+1. Kelly-1.0.0.zip 다운로드
+2. 정적파일 분석
+3. index.html 오픈, VS Views > Shared > _Layout.cshtml 디자인 태그 옮기기
+4. wwwroot 내 vendor 에서 Bootstrap 관련 폴더삭제   
+    - php 관련도 추후 삭제 필요
+5. _Layout.cshtml 작업
+
+    <img src="./image/web0013.png" width="600">
+
+## 5일차
+
+### ASP.NET Core
+
+#### ASP.NET Core MVC - Kelly Portfolio 디자인 클로닝(계속)
+1. Properties> launchSettgins.json
+    - hotReloadEnabled 설정키 추가
+2. _Layout.cshtml 작업 계속
+    - head, nav, footer, script영역 공통부분 
+    - main.js 소스를 site.js로 복사/붙여넣기
+    - 원본 head의 google font 태그 그대로 사용
+    - ASP.NET Core에서 생성한 <link rel="stylesheet" href="~/MyPortfolioWebApp.styles.css" asp-append-version="true" /> 주석처리
+3. 원본 이미지 등 정적리소스를 변경시 반영안되는 경우
+    - 웹브라우저에 캐시가 남아있기 때문
+    - 웹브라우저 설정 > 개인정보 보호 및 보안 > 인터넷 사용기록 및 삭제 > 전체삭제
+    - 웹브라우저가 없는 리소스는 재다운로드
+4. HomeController에 About 메서드 생성
+    - 뷰 추가
+    - ASP.NET Core 링크 asp-controller, asp-action 속성을 사용해야
+5. About.cshtml부터 Contact.cshtml까지
+    - CSS 부터 적용
+   
+6. DB연동
+    - NuGet 패키지
+        - Bogus (Python Faker 라이브러리)
+        - `Microsoft.EntityFrameworkCore` 8.0.x
+        - `Microsoft.EntityFrameworkCore.Tools` 8.0.x
+        - `Pomelo.EntityFrameworkCore.MySql` 8.0.3
+        - EntityFrameworkCore는 전부 Version Major 숫자가 일치해야 함(현재 8버전)
+    - **EntityFramework** `Code First` 방식 - C#으로 클래스 작성하고 위저드를 통해서 DB를 만드는 방식
+        - DB를 잘 몰라도 웹개발 가능토록 만든 기술
+
+    - Model > News 클래스 생성
+    - appsettings.json, DB연결문자열 추가
+    - Model > ApplicationDbContext 클래스 생성
+    - Progam.cs에서 초기화 설정에 DB연결을 추가
+
+    - 도구>NuGet패키지 관리자> 패키지 관리자 콘솔로 진입. 아래의 1, 2번 명령어를 순차적 실행
+        ```shell
+        PM1> add-migration AddNewsToDatabase
+        Build started...
+        Build succeeded.
+        To undo this action, use Remove-Migration.
+        PM2> update-database
+        Build started...
+        ...
+        Build succeeded.
+        ...
+        Done.
+        PM>
+        ```
+    - MySQL Workbench 해당 스키마(DB)에 News 테이블 생성 확인, 더미데이터 입력
+    - NewsController 클래스 생성
+    - `Entity Framework를 사용하여 뷰가 포함된 MVC 컨트롤러` 선택
+
+    <img src="./image/web0014.png" width="600">
+
+7. Controller 설명
+    - CRUD 중
+        - SELECT는 GET메서드만 존재
+        - 데이터가 처리되면 INSERT, UPDATE, DELETE 기능에는 GET, POST메서드 둘 다 필요
+        - form 태그의 `asp-action`이 POST 메서드
+
+8. 개발콘솔에서 CRUD 로그 확인
+
+    <img src="./image/web0015.png" width="600">
+
+9. 작업화면
+
+    https://github.com/user-attachments/assets/33b49f9b-946b-44ae-9ad2-ae6521bf1e7d
+    
+
+## 6일차
+
+### ASP.NET Core
+
+#### EntityFramework DB First
+- DB를 먼저 설계하고 관련된 C#코드를 위저드가 자동으로 만들어주는 방식
+- EntityFramework DB연동방식 : ORM(Object-Relational Mapping) 방식
+    - 제일 최근의 DB연동기법
+    - Spring Boot JPA, myBatis 과 동일
+    - EntityFramework - WPF, 윈앱, 웹앱
+- DB의 테이블 내용을 VS Models에 가져온 이후는 Code First, DB First 작업이 동일
+- 자동 완성으로 그냥 사용은 불가. 수정이 필요
+
+#### EF DB First 연습
+1. 프로젝트 생성
+2. NuGet 패키지 관리자
+    - Microsoft.EntityFrameworkCore 8.0.16
+    - Microsoft.EntityFrameworkCore.Tools 8.0.16
+    - Microsoft.EntityFrameworkCore.Design 8.0.16 (옵션)
+    - `MySql.EntityFrameworkCore` 8.0.14 (DB First시 반드시 필요!!)
+    - Pomelo.EntityFrameworkCore.MySql 8.0.3
+3. appsetting.json에 DB연결 문자열 추가
+4. NuGet 패키지 관리자 콘솔에서 해당 프로젝트로 변경(기본프로젝트 드롭다운)
+5. 아래 내용 입력
+
+    ```shell
+    PM> dir
+        디렉터리: C:/Source/iot-webapp-2025/day07/Day07Study
+
+    Mode                 LastWriteTime         Length   Name                                                                                                                                      
+    ----                 -------------         ------   ----                                                                                                                                      
+    d-----        2025-05-30   오전 9:32                DbFirstWebApp
+    d-----        2025-05-30   오전 9:22                MyPortfolioWebApp                                                                                                                         
+    -a----        2025-05-29   오전 9:35           1158 Day07Study.sln  
+
+    PM> cd ./DbFirstWebApp  
+    PM> Scaffold-DbContext "Server=localhost;Database=bookrentalshop;Uid=root;Pwd=12345;Charset=utf8;" 
+        MySql.EntityFrameworkCore -OutputDir Models
+    Build started...
+    Build succeeded.
+    ...
+    PM> 
+    ```
+6. Visual Studio 프로젝트 Models 폴더 생성된 클래스 확인
+7. Program.cs DB연결 초기화 추가
+8. BookrentalshopContext.cs 내 OnConfiguring 메서드 주석처리!
+9. BookController 컨트롤러(Entity Framework를 사용하여 뷰가 포함된 MVC 컨트롤러) 생성
+10. _Layout.cshtml 네비게이션 메뉴 추가
+11. 실행확인
+
+    <img src="./image/web0017.png" width="600">
+
+12. 자동으로 만들 경우의 문제점
+    - Model의 관계 부분에서 부모로의 연결이 Not Null로 연결됨. CUD 작업 불가
+    - EF Core의 탐색 속성(Navigation Property)
+    - = null!로 정의되어 있어서 EF Core는 내부적으로 필수(NOT NULL) 관계라고 간주
+    - public virtual Divtbl DivisionNavigation { get; set; } **= null!**; 
+    - public virtual Divtbl? DivisionNavigation { get; set; } 로 변경
+
+    - HACK : 자동 생성 후 수정 주석부분 확인 | BookController, Model, View 확인할 것
+
+    <img src="./image/web9998.png" width="600">
+
+13. WebEditor 클라이언트 라이브러리 Trumbowyg 설치
+    - 클라이언트 라이브러리 추가
+
+    <img src="./image/web9997.png" width="600">
+
+14. Markdown Viewer
+    - NuGet 패키지 관리자, Westwind.AspNetCore.Markdown 설치
+
+15. 메일관련
+    - [소스확인](./ref/Day07Study/MyPortfolioWebApp/Controllers/HomeController.cs)
+
+16. 메뉴 활성화
+    - _Layout.cshtml 내에 작성
+
+    ```cs
+    // cshtml 상단.
+    @using Microsoft.AspNetCore.Mvc.Rendering
+    @inject Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper Html
+
+    @functions {
+        bool IsActive(string controller, string action)
+        {
+            var routeData = ViewContext.RouteData;
+            var currentAction = routeData.Values["action"]?.ToString();
+            var currentController = routeData.Values["controller"]?.ToString();
+
+            return string.Equals(controller, currentController, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(action, currentAction, StringComparison.OrdinalIgnoreCase);
+        }
+
+        string ActiveClass(string controller, string action) =>
+            IsActive(controller, action) ? "active" : "";
+    }
+    ```
+
+    ```html
+    <li><a asp-controller="Home" asp-action="Index" class="@ActiveClass("Home", "Index")">Home</a></li>
+    ```
+
+#### ASP.NET Core MVC - Kelly Portfolio 디자인 클로닝(계속)
+- 뉴스, 게시판 완료
+- 한글화
+- 마무리
