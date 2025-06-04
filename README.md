@@ -619,7 +619,7 @@
     https://github.com/user-attachments/assets/33b49f9b-946b-44ae-9ad2-ae6521bf1e7d
     
 
-## 6일차
+## 7일차
 
 ### ASP.NET Core
 
@@ -721,7 +721,11 @@
     <li><a asp-controller="Home" asp-action="Index" class="@ActiveClass("Home", "Index")">Home</a></li>
     ```
 
+## 8일차
+
 #### ASP.NET Core MVC - Kelly Portfolio 디자인 클로닝(계속)
 - 뉴스, 게시판 완료
 - 한글화
 - 마무리
+
+
