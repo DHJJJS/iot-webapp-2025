@@ -1365,19 +1365,23 @@ section,
         background: color-mix(in srgb, var(--accent-color), transparent 25%);
     }
 
-    /* 이외 커스텀하고 싶은 스타일이 있으면 아래 작성할 것 */
-    /*
-        board-table
-    */
-    .board-table {
-        width: 100%;
-        color: #333333; /*#333과 동일*/
-        font-size: 14px;
-        background-color: #f5f5f5;
-        border-collapse: collapse;
-    }
+/* 이외 커스텀하고 싶은 스타일이 있으면 아래 작성할 것 */
+/*
+    board-table
+*/
+.board-table {
+    width: 100%;
+    color: #333333;  /* #333과 동일 */
+    font-size: 14px;
+    background-color: #f5f5f5;
+    border-collapse: collapse;
+}
 
-    /* board-table 헤더부분 */
+.board-table > :not(caption) > * > * {
+    padding: 0.5rem 0.5rem;
+}
+
+/* board-table 헤더부분 */
     .board-table thead tr {
         background-color: #67C5B9;
         color: #FFFFFF;
@@ -1387,10 +1391,37 @@ section,
 
     /* 본문 row중 홀수(odd)는 흰색배경 */
     .board-table tbody tr:nth-child(odd) {
-        background-color: #FFFFFF;
+        background-color: #FFFFFF; 
     }
 
-    /* 본문 row중 짝수(EVEN)은 연한회색배경*/
-        .board-table tbody tr:nth-child(even) {
-            background-color: #F9f9f9;
-        }
+    /* 본문 row중 짝수(even)는 연한회색배경 */
+    .board-table tbody tr:nth-child(even) {
+        background-color: #F9F9F9;
+    }
+
+    /* 마우스오버 효과 */
+    .board-table tbody tr:hover {
+        background-color: #E0F7FA;
+        transition: background-color 0.2s ease-in-out; /* 배경색 애니메이션 효과 */
+    }
+
+    .board-table tbody tr:hover a:hover {
+        text-decoration: underline;
+    }
+
+    .board-table tbody td.content-center {
+        text-align: center;
+    }
+
+/* btn-kelly 클래스. 색상변경 부트스트랩 버튼에 디자인추가적용 */
+.btn-kelly {
+    background-color: #67C7BB;
+    color: white;
+    border-style: none;
+}
+
+.btn-kelly:hover {
+    background-color: #33AE9F;
+    color: white;
+    border-style: none;
+}
