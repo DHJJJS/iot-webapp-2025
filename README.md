@@ -933,6 +933,7 @@
 
 ![2025-06-11 15 51 00](https://github.com/user-attachments/assets/b4e978c7-f26c-4a92-880f-54e23ae6a521)
 ![2025-06-11 15 51 36](https://github.com/user-attachments/assets/0cde7f1f-3e2e-41fd-8942-7d9449ac4e5c)
+![2025-06-11 16 10 38](https://github.com/user-attachments/assets/e746ab01-5f7e-49df-b1c8-e262fb492ea2)
 
 
 ## 11일차
