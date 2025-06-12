@@ -20,6 +20,8 @@
             // javascript 함수 선언이 특이함
             // function getData() == var getData = function () {}
             var getData = function () {
+            getData(); // 함수호출(파이썬 로직들과 동일)
+
                 $.getJSON("http://localhost:6200/api/TodoItems", function (data) {
                     // WebAPI 호출이 성공하면
                     //alert("웹 API호출 성공!!");
@@ -30,7 +32,7 @@
                         let isComplete = val.isComplete;
                         $(`<label class="list-group-item d-flex gap-3">
                              <input class="form-check-input flex-shrink-0" 
-                                    type="checkbox" value="" readonly="true"
+                                    type="checkbox" value="" disabled
                                     ${isComplete == 1 ? 'checked' : ''} />
                              <span>
                                <strong>${val.title}</strong>
@@ -40,13 +42,15 @@
                                </small>
                              </span>
                            </label>`, { text: '' }).appendTo($('#todoItems'));
+
+                        // 할일 입력영역 데이터 할당
+                        $('#in-id').add(data.id);
+                        $('#in-title').val(data.title);
+                        $('#in-todoDate').val(data.todo.slice(0, 4) + '-' + data.todoDate.slice(4, 6) + '-' + data.todoDate.slice(6, 8));
+                        $('#in-isComplete').prop(isComplete == 1 ? 'checked' : '');
                     });
                 });
             }
-            getData(); // 함수호출(파이썬 로직들과 동일)
-
-            // btnQuery 버튼클릭 이벤트 메서드 
-            $('#btnQuery').click(function () {
                 let id = $('#id').val();
 
                 //alert(id);
@@ -69,8 +73,55 @@
                 });
             });
 
+            getData();
+
+            //btnQuery 버튼클릭 이벤트 메서드
+            $('#btnQuery').click;
+
             // btnInsert 버튼클릭 이벤트 메서드
             $('#btnInsert').click(function () {
+                let id = $('#id'.val());
+
+                if (id == "") {
+                    getData(); // 입력값없이 조회하면 전체 조회와 동일
+
+                    // 전체 조회시는 할일 입력 영역을 전부 초기화
+                    $('#in-id').add(data.id);
+                    $('#in-title').val(data.title);
+                    $('#in-todoDate').val(data.todo.slice(0, 4) + '-' + data.todoDate.slice(4, 6) + '-' + data.todoDate.slice(6, 8));
+                    $('#in-isComplete').prop(isComplete == 1 ? 'checked' : '');
+
+                } else {
+                    $.getJSON("http://localhost:6200/api/TodoItems", function (data) {
+                        // WebAPI 호출이 성공하면
+                        //alert("웹 API호출 성공!!");
+                        $('#todoItems').empty(); // todoItems div태그 내를 전부 비워줌
+
+                        $.each(data, function (key, val) {
+                            // 텍스트 출력을 형식변경
+                            let isComplete = val.isComplete;
+                            $(`<label class="list-group-item d-flex gap-3">
+                               <input class="form-check-input flex-shrink-0" 
+                               type="checkbox" value="" disabled
+                               ${isComplete == 1 ? 'checked' : ''} />
+                               <span>
+                               <strong>${val.title}</strong>
+                               <small class="d-block text-body-secondary">
+                               <i class="bi bi-calendar-check-fill"></i>
+                               ${val.todoDate.slice(0, 4) + '-' + val.todoDate.slice(4, 6) + '-' + val.todoDate.slice(6, 8)}
+                               </small>
+                               </span>
+                               </label>`, { text: '' }).appendTo($('#todoItems'));
+
+                            // 할일 입력영역 데이터 할당
+                            $('#in-id').add(data.id);
+                            $('#in-title').val(data.title);
+                            $('#in-todoDate').val(data.todo.slice(0, 4) + '-' + data.todoDate.slice(4, 6) + '-' + data.todoDate.slice(6, 8));
+                            $('#in-isComplete').prop(isComplete == 1 ? 'checked' : '');
+                        });
+                    });
+                }
+
                 //alert('저장버튼 클릭');
                 // 할일, 완료일자 미입력시 Validation 체크는 패스
                 // replace('-', '') : -가 한번만 제거
@@ -166,6 +217,8 @@
                         </div>
                         <div class="mb-0 text-end">
                             <input type="button" class="btn btn-primary" value="저장" id="btnInsert" />
+                            <input type="button" class="btn btn-success" value="수정" id="btnInsert" />
+                            <input type="button" class="btn btn-danger" value="삭제" id="btnInsert" />
                         </div>
                     </div>
                 </div>
