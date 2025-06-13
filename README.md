@@ -1057,7 +1057,234 @@
 ### ASP.NET Core API서버(계속)
 
 #### WebAPI 서버 + 웹사이트
+- WebAPI 서버는 전일자 프로젝트 사용
+- ASP.NET Core 프로젝트에서 정적페이지HTML, 동적페이지cshtml 동시 사용가능
+- 웹사이트만 새로 생성
+    1. ASP.NET Core 비어있음 으로 프로젝트 생성
+    2. wwwroot/html/index.html 파일 생성 - VS Code의 Live Server 예제와 동일(정적페이지)
+    3. Program.cs에서 MVC패턴 관련된 로직 추가
+    4. Controllers/HomeController.cs 생성
+    5. Index() 메서드에서 뷰 추가 - ASP.NET Core 동적페이지
+    6. Views 폴더 하위 파일들이 필요
+        - _ViewImports.cshtml
+        - _ViewStart.cshtml
+        - Shared/_Layout.cshtml.css 
+    7. index.html에 화면UI 구현
+    8. AJAX로 WebAPI 호출하고 데이터를 화면에 뿌리는 로직 추가
+    9. input 태그로 검색부분 구현
+        - Javascript와 데이터를 주고받으면 form태그가 없어도 됨
+        - `<form>` - 서버사이드와 데이터를 주고 받을때 필요
+    10. 입력부분 구현
+    11. jQuery 로직 구현
+
+- AJAX : Asyncronous Javascript And Xml. 자바스크립트에서 비동기로 메서드를 호출 기술
+    - 예전에 XML로만 데이터 전달. 현재는 Json으로 이전 중
+
+- CORS Policy : Cross-Origin Resource Sharing. 다른 출처 리소스 접근허용 보안 메커니즘
+    - 아무나 URL로 호출을 못하도록 웹페이지 보안설정
+    - WebAPI 서비스에서 Program.cs에 CORS 호출권한 설정 추가
+    - 프론트엔드는 CORS 설정 필요없음
+
+    <img src="./image/web0033.png" width="400">
 
 
+## 14일차
+
+### ASP.NET Core API서버(계속)
+
+#### WebAPI 서버 + 웹사이트(계속)
+- 할일 수정/삭제
+- 실행화면
+
+    <img src="./image/web0034.png" width="600">
+
+- 결론
+    - WebAPI로 백엔드를 운영하면 프론트는 모두 사용가능(윈앱, 웹앱, 모바일앱)
 
 ### AWS 클라우드 업로드
+- 클라우드서비스 사용 : 어디서나 웹사이트 공개
+- 온프레미스 : 직접 서버를 구축. DB서버구축, 웹서버구축 등 직접 운영
+    - 서버 하드웨어 구매, 서버실 구축, UPS구성, 네트워크 스위치구성
+    - OS구매, SW구매, 운영환경구성, 개발환경구성
+    - 운영하면 문제 해결, 유지보수
+- 클라우드 : 서버구축 필요없음. DB서버 신청 생성
+    - 서버실 구축x, 하드웨어 구매x, SW구매x, 운영문제 관리x
+    - 최초 구축비용이 들지 않음
+    - 사용료가 저렴하지 않음
+
+- AWS 라이트세일 - https://aws.amazon.com/ko/lightsail/
+    - 기존 AWS보다 저렴하게 사용할 수 있는 서비스
+
+#### AWS 라이트세일에 웹서버 올리기
+1. 인스턴스 생성
+    1. Microsoft Windows > Windows Server 2019 > 
+    2. 네트워크 듀얼스택 
+    3. 크기, 월별 $9.5 선택 `90일 무료`
+    4. 인스턴스 이름 
+    5. 인스턴스 생성
+2. 인스턴스 관리 > RDP를 사용하여 연결
+    1. 초기화 대기(네트워크 나올때까지, 1분가량)
+    2. Network2 허용 Yes 클릭
+    3. Server Manager 오픈
+        - Configure this local server
+        - IE Enhanced Security Config : ON(웹사이트 오픈 불가) -> OFF
+3. 필요 SW 다운로드
+    1. MySQL Installer for Windows
+    2. Chrome browser(option)
+    3. FileZilla FTP Server 
+4. MySQL 설치
+    1. Custom 선택
+    2. MySQL Server 8.0.42 - x64 만 선택, 설치 후 Next
+    3. 일반적으로 Next
+    4. Authentication Method > Use Legacy Authentication (Retain MySQL 5.x Compatibility) 선택
+        - 암호정책이 간결
+        - 대신 AWS는 IP나 공개된 상황이라 간단한 암호하면 절대 안됨
+    5. 나머지는 Next, Execute 실행
+    6. 마지막에 Finish 클릭
+    7. Firewall & Network Protection 실행 > Advanced setting 선택
+        - Inbound Rules > Port 3306 확인, 없으면 생성
+    8. 라이트세일 인스턴스 관리 > 네트워크
+        - IPv4 방화벽에 규칙추가
+    9. MySQL Workbench 접속 생성/확인
+
+5. FileZilla FTP 서버 설치
+    1. 설치는 Next로 설치
+    2. 서버 시작 후
+    3. 메뉴 Server > Configure
+        - Server listener의 아이피 0.0.0.0 -> 본인의 내부서버 아이피로 변경
+    4. 프로토콜 셋팅 > FTP and FTP over TLS 메뉴
+        - Connection Security
+            - Generate new 버튼 클릭 후 OK
+        - Passive Mode
+            - Use custom port range 클릭
+            - From : 55000
+            - To : 55999   
+    5. 탐색기 오픈, Website 폴더 생성     
+    6. Right Management > Users 사용자 계정 생성
+        - 사용자 생성
+        - Mount points
+            - Virtual Path : / (root)
+            - Native path : 탐색기에서 만든 Website 지정
+    7. Firewall & Network Protection > Advanced setting
+        - Inbound Rules
+        - New Rule
+            - Program FileZilla Server 선택
+            - 전부 오픈
+    8. 라이트세일 인스턴스 관리
+        - 네트워크 IPv4 방화벽에서 21, 55000~55999 포트 오픈
+
+    9. 로컬PC에 파일질라 클라이언트 설치
+        - 접속확인
+
+6. Visual Studio 프로젝트 오픈(MyPortfolioWebApp)
+    1. 게시 > FTP/FTPS 선택
+    2. 서버 - ftps://aws-public-ip
+    3. 사이트경로 - /
+    4. 수동모드 - 체크
+    5. 사용자이름/패스워드 - FileZilla 서버 설정한 계정
+    6. 연결유효성후 인증서 승인
+
+7. MySQL Workbench
+    1. Local DB의 데이터베이스 Server > Data Export로 백업
+    2. AWS MySQL Workbench에서 FTP로 전달한 sql을 Server > Data Import로 복구
+    3. 저장프로시저는 쿼리 복사해서 재실행
+
+
+### 부가적인 기능
+- OAuth (구글로그인)
+- 파일업로드
+
+### MyPortfolio 완성
+
+## 15일차
+
+### AWS 클라우드 업로드
+
+#### 14일차 확인한 문제
+- FileZilla FTP와 연동 VS에서 FTP로 게시할때 업로드 문제
+- 파일 자체는 업로드 성공, 실패메시지가 리턴
+- 다른 방법
+    - IIS + WebDeploy : 현재 문제발생
+    - IIS FTP 사용 : 해결방법
+
+#### AWS 라이트세일 웹서버 올리기(계속)
+1. 인스턴스 진입
+    1. 서비스 오픈 > FileZilla-Server 중지(Startup type Manual)
+    2. Server Manager 실행 -> Add roles and features
+        - Role-based or feature-based installation -> 자기 서버 선택 Next
+        - 아래 기능 설치
+            - WebServer IIS 선택 후 Add Features
+            - Health And Diagnostics -> Logging Tool, Request Monitor 추가 선택
+            - Application Deployment -> ASP.NET 4.8, ISAPI Extenstions, ISAPI Filters 추가 선택
+            - FTP Server 아래 전부 선택
+    3. asp.net Core hosting bundle 8.0 웹브라우저 검색
+
+        <img src="./image/web0037.png" width="500">
+
+        - https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+        - aspnetcore-runtime-8.0.17-win-x64.exe 그냥 설치
+    4. dotnet-hosting-8.0.17-win.exe 설치
+        - 콘솔(파워셀)에서 iisreset 실행
+
+        <img src="./image/web0038.png" width="600">
+
+    5. IIS 서비스
+        - Modules -> `AspNetCoreModuleV2`가 있는지 확인
+        - Add FtpSite...
+            - 이름, 물리적 경로 선택
+            - IP/All Unassigned, Port/21, SSL/Allow SSL 선택
+            - Authentication : Basic, 사용자 Administrator, 암호는 인스턴스 암호 사용
+            - Authorization : permission, READ/WRITE 둘다 체크
+    6. Application Pool 생성
+        - ASPNETCore Pool 생성
+
+        <img src="./image/web0039.png">
+
+    7. OS방화벽, AWS 인스턴스 방화벽
+        - OS방화벽에는 21, 1024-65535 전부 오픈
+        - AWS 인스턴스 네트워크도 동일하게 오픈
+
+    8. IIS 서비스
+        - WebSite 생성 > Add Website
+        - SiteName 옆 Application Pool을 Select버튼, ASPNetCore를 선택!
+
+2. 90일 이후
+    - 비용발생, 반드시 인스턴스 삭제할 것
+
+
+### 부가적인 기능
+- 파일업로드
+- OAuth (구글로그인)
+
+
+#### 웹사이트 파일업로드 기능 구현
+1. Model.News
+    - UploadFile 속성 추가
+2. MySQL Workbench
+    - News 테이블 UploadFile 컬럼 추가
+    - 운영중인 테이블에 새 컬럼을 추가하면 `Not Null 설정 불가`!
+3. New_PagingBoard 저장프로시저 오류 수정
+    - UploadFile 컬럼 추가되어 생기는 오류
+4. Views.News.Create.cshtml
+    - 입력양식에 파일입력 추가
+    - form 태그에 파일업로드 enctype 속성 추가
+5. wwwroot/upload 폴더 추가
+6. Controller/NewController.cs
+    - Create() Post메서드에 파일 파라미터 추가
+    - 파일 저장 로직 추가
+7. Views/News/Details.cshtml, Delete.cshtml 동일
+    - 파일 다운로드 영역 추가
+8. Views/News/Edit.cshtml
+    - 파일업로드 영역 추가(Create.cshtml 추가)
+9. Cotroller/NewsEditController.cs
+    - Edit() Post메서드에 파일 파라미터 추가
+    - 파일저장 로직 처리(Create() 메서드 로직 복사)
+10. VS IIS Express 사용시
+    - 최대 30MB 제약 걸려있음 - ERR_CONNECTION_RESET 발생
+    - 업로드 크기를 제한을 두더라도 최대사이즈는 설정 필요
+11. Program.cs
+    - 최대 업로드 크기 설정
+
+    <img src="./image/web0040.png" width="600">
+
+### 전체 마무리
